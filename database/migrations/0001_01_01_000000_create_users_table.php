@@ -11,12 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // 1. Modifikasi Tabel Users sesuai ERD kamu
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->id('ID_User'); // PK sesuai rancangan [cite: 54, 165]
+            $table->string('Username')->unique(); // [cite: 55, 153]
+            $table->string('Password'); // [cite: 56, 155]
+            $table->string('Nama_Lengkap'); // [cite: 57, 157]
+            $table->string('Gender'); // [cite: 58, 159]
+            $table->string('Email')->unique(); // 
+            
+            // Enum Role sesuai rancangan [cite: 60, 163]
+            $table->enum('Role', [
+                'Admin', 'Dosen', 'Operator_Surat', 'Operator_Nomor', 
+                'Supervisor', 'Manager', 'Wakil_Dekan', 'Dekan'
+            ]);
+
             $table->rememberToken();
             $table->timestamps();
         });
